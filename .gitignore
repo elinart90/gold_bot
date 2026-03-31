@@ -1,0 +1,12 @@
+.env
+data/raw/
+data/processed/
+data/features/
+models/*.pkl
+models/*.joblib
+logs/
+__pycache__/
+*.pyc
+.venv/
+venv/
+.vscode/settings.json

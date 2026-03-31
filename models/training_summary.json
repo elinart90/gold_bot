@@ -1,0 +1,16 @@
+{
+  "xgboost_avg": {
+    "precision": 0.7498,
+    "recall": 0.769,
+    "f1": 0.7567,
+    "auc_roc": 0.8095
+  },
+  "lightgbm_avg": {
+    "precision": 0.7451,
+    "recall": 0.7627,
+    "f1": 0.751,
+    "auc_roc": 0.8086
+  },
+  "n_features": 71,
+  "n_samples": 4996
+}
