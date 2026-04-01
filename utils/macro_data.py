@@ -45,6 +45,17 @@ def fetch_fred_data(start_date: str = START_DATE) -> pd.DataFrame:
     df.sort_index(inplace=True)
     if "cpi_yoy" in df.columns:
         df["cpi_yoy"] = df["cpi_yoy"].pct_change(12) * 100
+    # Shift each series to its release hour to prevent leakage
+    release_hours = {
+        "cpi_yoy":    13,   # CPI releases at 13:30 UTC
+        "fed_funds":  18,   # FOMC at ~18:00 UTC
+        "real_rate":   0,   # Daily close, no shift needed
+        "us10y_yield": 0,   # Daily close, no shift needed
+    }
+    for col, hour in release_hours.items():
+        if col in df.columns and hour > 0:
+            df[col] = df[col].shift(1)  # push to next day to be safe
+
     df.ffill(inplace=True)
     return df
 
